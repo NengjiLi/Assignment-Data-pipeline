@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Prices</title>
+    <script>
+        function fetchPrices() {
+            fetch('/prices')
+                .then(response => response.json())
+                .then(data => {
+                    const priceList = document.getElementById('price-list');
+                    priceList.innerHTML = '';
+                    data.forEach(price => {
+                        const li = document.createElement('li');
+                        li.textContent = price;
+                        priceList.appendChild(li);
+                    });
+                });
+        }
+        setInterval(fetchPrices, 5000);
+    </script>
+</head>
+<body>
+    <h1>Real-Time Stock Prices</h1>
+    <ul id="price-list"></ul>
+</body>
+</html>
